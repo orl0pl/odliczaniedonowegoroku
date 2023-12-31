@@ -43,12 +43,11 @@
                     #f06,
                     #9f6,
                     #3cf,
-                    #6f0,
                     #6f0 100%);
             /* background: linear-gradient(to left, #f00 0%, #0af 33%, #f00 66%, #0af 100%); */
             /* background: linear-gradient(45deg, #f00 0%, #0af 20%, #0f0 40%,  #f00 60%, #0af 80%, #0f0 100%);  */
             background-size: 400% 400%;
-            animation: gradientAnimation 60s linear infinite;
+            animation: gradientAnimation 6s ease-in-out alternate infinite;
             background-attachment: fixed;
         }
 
@@ -113,11 +112,11 @@
 
         @keyframes gradientAnimation {
             0% {
-                background-position: 100% 0%;
+                background-position: 0% 0%;
             }
 
             100% {
-                background-position: 0% 0%;
+                background-position: 100% 0%;
             }
         }
 
