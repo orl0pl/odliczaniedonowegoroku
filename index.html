@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Odliczanie do nowego roku</title>
+    <style>
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+                Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+
+            padding: 0;
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: space-evenly;
+            transition: background;
+            user-select: none;
+        }
+
+        body.gradient_normal {
+            background: linear-gradient(45deg,
+                    #f06 0%,
+                    #9f6,
+                    #3cf,
+                    #6f0,
+                    #f06,
+                    #9f6,
+                    #3cf,
+                    #6f0,
+                    #6f0 100%);
+            /* background: linear-gradient(to left, #f00 0%, #0af 33%, #f00 66%, #0af 100%); */
+            /* background: linear-gradient(45deg, #f00 0%, #0af 20%, #0f0 40%,  #f00 60%, #0af 80%, #0f0 100%);  */
+            background-size: 400% 400%;
+            animation: gradientAnimation 60s linear infinite;
+            background-attachment: fixed;
+        }
+
+        body.gradient_ten {
+            background-size: 200% 200%;
+            animation: gradientAnimation_ten 10s linear;
+            background-color: black;
+            /* background: linear-gradient(to right, #fff -20%, #000, #fff 120%); */
+            /* background: linear-gradient(#000, #f00 120%); */
+            /* background: linear-gradient( #ff7e5f, #00f); */
+        }
+
+        body.gradient_ten span {
+            color: white;
+            
+        }
+
+        @keyframes gradientAnimation_ten {
+            0% {
+                background: linear-gradient(#000, #f00 120%);
+            }
+            10% {
+                background: linear-gradient(#000, #0f0 120%);
+            }
+            20% {
+                background: linear-gradient(#000, #00f 120%);
+            }
+            30% {
+                background: linear-gradient(#000, #ff0 120%);
+            }
+            40% {
+                background: linear-gradient(#000, #0ff 120%);
+            }
+            50% {
+                background: linear-gradient(#000, #f0f 120%);
+            }
+            60% {
+                background: linear-gradient(to right, #f00 -20%, #000, #0ff 120%);
+            }
+            70% {
+                background: linear-gradient(to right, #ff0 -20%, #000, #00f 120%);
+            }
+            80% {
+                background: linear-gradient(to right, #f0f -20%, #000, #0f0 120%);
+            }
+            90% {
+                background: #000;
+            }
+            100% {
+                background: #fff;
+            }
+        }
+
+        @keyframes gradientAnimation {
+            0% {
+                background-position: 100% 0%;
+            }
+
+            100% {
+                background-position: 0% 0%;
+            }
+        }
+
+        body.gradient_ten #godziny,
+        body.gradient_ten #minuty,
+        body.gradient_ten #sekundy {
+            font-size: 15vw;
+            font-weight: 700;
+            font-family: Consolas, monospace;
+            background-image: linear-gradient(135deg, #ffdf, #0043);
+            animation: gradientAnimation 10s ease-in infinite;
+				background-clip: text;
+				-webkit-text-fill-color: transparent;
+            mix-blend-mode: lighten;   
+        }
+
+        body.koniec {
+            background: white;
+            
+        }
+        
+        body.koniec #sekundy {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            font-size: 48px;
+            background: linear-gradient(135deg, #000, #000);
+            background-clip: text;
+				-webkit-text-fill-color: transparent;
+            mix-blend-mode: darken;   
+        }
+
+        body.koniec #sekund {
+            display: none;
+        }
+
+        #godziny,
+        #minuty,
+        #sekundy {
+            font-size: 10vw;
+            font-weight: 700;
+            font-family: Consolas, monospace;
+            background: linear-gradient(135deg, #002f, #0043);
+				animation: gradientAnimation 10s ease-in infinite;
+				background-clip: text;
+				-webkit-text-fill-color: transparent;
+            /* filter: invert(); */
+            mix-blend-mode: darken;
+        }
+
+        div {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .label {
+            font-size: 20px;
+            color: #0005;
+            font-family: Consolas;
+        }
+    </style>
+</head>
+
+<body class="gradient_normal">
+    <div id="hours">
+        <span id="godziny">2</span>
+        <span class="label" id="godzin">Godziny</span>
+    </div>
+    <div id="minutes">
+        <span id="minuty">10</span>
+        <span class="label" id="minut">Minut</span>
+    </div>
+    <div>
+        <span id="sekundy">15</span>
+        <span class="label" id="sekund">Sekund</span>
+    </div>
+    <!-- <script src="https://unpkg.com/i18next@23.7.13/dist/umd/i18next.js"></script> -->
+    <script>
+        const keys = {
+            few: [2, 3, 4, 22, 23, 24, 32, 33, 34, 42, 43, 44, 52, 53, 54, 62, 63, 64, 72, 73, 74, 82, 83, 84, 92, 93, 94],
+            many: [0, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 25, 26, 27, 28, 29, 30, 31, 35, 36, 37, 38, 39, 40, 41, 45, 46, 47, 48, 49, 50, 51, 55, 56, 57, 58, 59, 60, 61, 65, 66, 67, 68, 69, 70, 71, 75, 76, 77, 78, 79, 80, 81, 85, 86, 87, 88, 89, 90, 91, 95, 96, 97, 98, 99, 100],
+            one: [1]
+        }
+        const textKey = {
+            hours: {
+                few: 'Godziny',
+                many: 'Godzin',
+                one: 'Godzina'
+            },
+            minutes: {
+                few: 'Minuty',
+                many: 'Minut',
+                one: 'Minuta'
+            },
+            seconds: {
+                few: 'Sekundy',
+                many: 'Sekund',
+                one: 'Sekunda'
+            }
+
+        }
+        function resolveLabel(value, type){
+            
+            if(keys.few.includes(value)){
+                return textKey[type].few;
+            }
+            else if(keys.many.includes(value)){
+                return textKey[type].many;
+            }
+            else if(keys.one.includes(value)){
+                return textKey[type].one;
+            }
+            else {
+                return "?"
+            }
+        }
+        const godziny = document.getElementById('godziny')
+        const minuty = document.getElementById('minuty')
+        const sekundy = document.getElementById('sekundy')
+        function update() {
+            var timeNow = new Date().getTime();
+            var nowyRok = new Date('2023.12.31 11:43');
+            var czasDoNowegoRoku = nowyRok - timeNow;
+
+            var seconds = Math.floor((czasDoNowegoRoku % (1000 * 60)) / 1000);
+            var minutes = Math.floor((czasDoNowegoRoku % (1000 * 60 * 60)) / (1000 * 60));
+            var hours = Math.floor((czasDoNowegoRoku % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))
+
+            if(czasDoNowegoRoku <= 0){
+                var seconds, minutes, hours = 0;
+            }
+
+            sekundy.innerText = seconds;
+            minuty.innerText = minutes.toString().padStart(2, '0');
+            godziny.innerText = hours;
+
+            if (czasDoNowegoRoku <= 3600*1000) {
+                document.getElementById('hours').style.display = 'none'
+            }
+
+            if (czasDoNowegoRoku <= 60*1000) {
+                document.getElementById('minutes').style.display = 'none'
+            }
+
+            if (czasDoNowegoRoku <= 0) {
+                document.body.className = 'koniec'
+                sekundy.innerText = 'Szczęśliwego nowego roku!';
+            }
+
+           
+
+            document.getElementById('godzin').innerText = resolveLabel(hours, 'hours')
+            document.getElementById('minut').innerText = resolveLabel(minutes, 'minutes')
+            document.getElementById('sekund').innerText = resolveLabel(seconds, 'seconds')
+
+            if(czasDoNowegoRoku <= 10*1000 && czasDoNowegoRoku > 0){
+                document.body.className = 'gradient_ten'
+            }
+
+            
+        }
+
+        update();
+        setInterval(update, 1000)
+
+
+    </script>
+</body>
+
+</html>
