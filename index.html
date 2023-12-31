@@ -13,7 +13,7 @@
 
 				padding: 0;
 				margin: 0;
-				height: 100vh;
+				height: 100svh;
 				display: flex;
 				align-items: center;
 				justify-content: space-evenly;
@@ -113,7 +113,7 @@
 			body.gradient_ten #godziny,
 			body.gradient_ten #minuty,
 			body.gradient_ten #sekundy {
-				font-size: 15vw;
+				font-size: 96px;
 				font-weight: 700;
 
 				background-image: linear-gradient(135deg, #ffdf, #0043);
@@ -165,7 +165,7 @@
 			}
 
 			.label {
-				font-size: 20px;
+				font-size: 16px;
 				color: #0005;
 				font-family: "Inconsolata", Consolas, monospace;
 			}
@@ -233,7 +233,7 @@
 			const sekundy = document.getElementById("sekundy");
 			function update() {
 				var timeNow = new Date().getTime();
-				var nowyRok = new Date("2023.12.31 14:19:40");
+				var nowyRok = new Date("2024.01.01 ");
 				var czasDoNowegoRoku = nowyRok - timeNow;
 
 				var seconds = Math.floor((czasDoNowegoRoku % (1000 * 60)) / 1000);
@@ -260,32 +260,34 @@
 					document.getElementById("minutes").style.width = "0";
 				}
 
-				if (czasDoNowegoRoku === 0 * 1000) {
-					document.body.style.background = "linear-gradient(45deg, #000, #f00)"; // tudaj daj gradient
-				} else if (czasDoNowegoRoku <= 1 * 1000) {
-					document.body.style.background = "linear-gradient(-45deg, #000, #0f0)"; // tudaj daj gradient
-				} else if (czasDoNowegoRoku <= 2 * 1000) {
-					document.body.style.background = "linear-gradient(90deg, #000, #00f)"; // Blue vibes to signal the impending blast-off!
-				} else if (czasDoNowegoRoku <= 3 * 1000) {
-					document.body.style.background = "linear-gradient(135deg, #000, #ff0)"; // Yellow hues for the cosmic countdown!
-				} else if (czasDoNowegoRoku <= 4 * 1000) {
-					document.body.style.background = "linear-gradient(180deg, #000, #0ff)"; // Aqua magic as we approach the launchpad!
-				} else if (czasDoNowegoRoku <= 5 * 1000) {
-					document.body.style.background = "linear-gradient(-135deg, #000, #f0f)"; // Magenta glow - almost there!
-				} else if (czasDoNowegoRoku <= 6 * 1000) {
-					document.body.style.background = "linear-gradient(to right, #f00 -20%, #000, #0ff 120%)"; // Back to red, preparing for liftoff!
-				} else if (czasDoNowegoRoku <= 7 * 1000) {
-					document.body.style.background = "linear-gradient(to right, #ff0 -20%, #000, #00f 120%)"; // Yellow to blue transition - countdown is real!
-				} else if (czasDoNowegoRoku <= 8 * 1000) {
-					document.body.style.background = "linear-gradient(to right, #f0f -20%, #000, #0f0 120%)"; // Magenta to green - engines are firing!
-				} else if (czasDoNowegoRoku <= 9 * 1000) {
-					document.body.style.background = "#000"; // Blackout just before the big moment!
-				} else if (czasDoNowegoRoku <= 10 * 1000) {
-					document.body.style.background = "#fff"; // Whiteout - here comes the New Year!
+				if (czasDoNowegoRoku > 0) {
+					if (czasDoNowegoRoku <= 1 * 1000) {
+						document.body.style.background = "#fff"; // Whiteout - here comes the New Year!
+					} else if (czasDoNowegoRoku <= 2 * 1000) {
+						document.body.style.background = "#000"; // Blackout just before the big moment!
+					} else if (czasDoNowegoRoku <= 3 * 1000) {
+						document.body.style.background =
+							"linear-gradient(to right, #f0f -20%, #000, #0f0 120%)"; // Magenta to green - engines are firing!
+					} else if (czasDoNowegoRoku <= 4 * 1000) {
+						document.body.style.background =
+							"linear-gradient(to right, #ff0 -20%, #000, #00f 120%)"; // Yellow to blue transition - countdown is real!
+					} else if (czasDoNowegoRoku <= 5 * 1000) {
+						document.body.style.background =
+							"linear-gradient(to right, #f00 -20%, #000, #0ff 120%)"; // Back to red, preparing for liftoff!
+					} else if (czasDoNowegoRoku <= 6 * 1000) {
+						document.body.style.background = "linear-gradient(-135deg, #000, #f0f)"; // Magenta glow - almost there!
+					} else if (czasDoNowegoRoku <= 7 * 1000) {
+						document.body.style.background = "linear-gradient(180deg, #000, #0ff)"; // Aqua magic as we approach the launchpad!
+					} else if (czasDoNowegoRoku <= 8 * 1000) {
+						document.body.style.background = "linear-gradient(135deg, #000, #ff0)"; // Yellow hues for the cosmic countdown!
+					} else if (czasDoNowegoRoku <= 9 * 1000) {
+						document.body.style.background = "linear-gradient(90deg, #000, #00f)"; // Blue vibes to signal the impending blast-off!
+					} else if (czasDoNowegoRoku <= 10 * 1000) {
+						document.body.style.background = "linear-gradient(-45deg, #000, #0f0)"; // Tudaj daj gradient
+					} else if (czasDoNowegoRoku <= 11 * 1000) {
+						document.body.style.background = "linear-gradient(45deg, #000, #f00)"; // Tudaj daj gradient
+					}
 				}
-
-				// ...
-
 				if (czasDoNowegoRoku <= 0) {
 					document.body.className = "koniec";
 					sekundy.innerText = "Szczęśliwego nowego roku!";
